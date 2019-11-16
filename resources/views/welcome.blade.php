@@ -76,7 +76,7 @@
                             <a href="{{ route('register') }}">Register</a>
                         @endif
                     @endauth
-                        <a href="{{ route('reserve') }}">Reserve</a>
+                        <a href="{{ route('reservations.index') }}">Reserve</a>
                 </div>
             @endif
 

@@ -40,7 +40,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('reserve') }}">Reserve</a>
+                            <a class="nav-link" href="{{ route('reservations.index') }}">Reserve</a>
                         </li>
                         @guest
                             <li class="nav-item">
