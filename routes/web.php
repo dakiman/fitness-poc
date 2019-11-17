@@ -21,3 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/reservations', 'ReservationController@index')->name('reservations.index');
 Route::post('/reservations', 'ReservationController@save')->name('reservations.save');
+
+Route::get('/coachDashboard', function(){ return View('coachDashboard');})->middleware('coachStatus');
+Route::get('/errorScreen', function(){ return View('errorScreen');});

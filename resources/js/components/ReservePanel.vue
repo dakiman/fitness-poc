@@ -9,6 +9,7 @@
                             <div class="col-md-5">
                                 <v-date-picker
                                     mode="single"
+                                    show-current="true"
                                     :value="null"
                                     color="red"
                                     is-dark
