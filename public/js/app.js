@@ -1974,6 +1974,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1993,11 +1994,9 @@ __webpack_require__.r(__webpack_exports__);
 
       this.loading = true;
       axios.post('/reservations', this.$data).then(function (response) {
-        console.log(response);
         _this.loading = false;
         _this.isFinished = true;
       })["catch"](function (error) {
-        console.log(error.response.data.errors);
         _this.loading = false;
         _this.errors = error.response.data.errors;
       });
@@ -64803,6 +64802,18 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
+/*ADD LOGGING IF .env VARIABLE MIX_APP_ENV is SET TO LOCAL*/
+
+if (true) {
+  window.axios.interceptors.response.use(function (response) {
+    console.log(response);
+    return response;
+  }, function (error) {
+    console.log(error.response);
+    return Promise.reject(error);
+  });
+}
+
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * The following block of code may be used to automatically register your
@@ -64839,7 +64850,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* WEBPACK VAR INJECTION */(function(process) {window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -64848,6 +64859,7 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+console.log(process.env);
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -64861,6 +64873,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
 
 /***/ }),
 

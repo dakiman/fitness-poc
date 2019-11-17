@@ -90,6 +90,7 @@
                                             <span v-if="isFinished">✔ Reservation Successful! </span>
                                         </b-button>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -123,12 +124,10 @@
                 axios
                     .post('/reservations', this.$data)
                     .then(response => {
-                        console.log(response);
                         this.loading = false;
                         this.isFinished = true;
                     })
                     .catch(error => {
-                        console.log(error.response.data.errors);
                         this.loading = false;
                         this.errors = error.response.data.errors;
                     })

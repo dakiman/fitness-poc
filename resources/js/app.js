@@ -8,6 +8,18 @@ require('./bootstrap');
 import BootstrapVue from 'bootstrap-vue'
 import VCalendar from 'v-calendar';
 
+/*ADD LOGGING IF .env VARIABLE MIX_APP_ENV is SET TO LOCAL*/
+if(process.env.MIX_APP_ENV == 'local') {
+    window.axios.interceptors.response.use(
+        response => {
+            console.log(response);
+            return response;
+        }, error => {
+            console.log(error.response);
+            return Promise.reject(error);
+        });
+}
+
 window.Vue = require('vue');
 
 /**
