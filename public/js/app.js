@@ -1936,6 +1936,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1944,6 +1945,7 @@ __webpack_require__.r(__webpack_exports__);
       email: '',
       phoneNumber: '',
       loading: false,
+      isFinished: false,
       errors: {}
     };
   },
@@ -1959,6 +1961,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/reservations', this.$data).then(function (response) {
         console.log(response);
         _this.loading = false;
+        _this.isFinished = true;
         alert('Success!');
       })["catch"](function (error) {
         console.log(error.response.data.errors);
@@ -51810,17 +51813,25 @@ var render = function() {
                         "b-button",
                         {
                           staticClass: "btn btn-primary",
-                          class: { "btn-danger": _vm.loading },
-                          attrs: { type: "submit" },
+                          class: {
+                            "btn-secondary": _vm.loading,
+                            "btn-success": _vm.isFinished
+                          },
+                          attrs: { disabled: _vm.isFinished, type: "submit" },
                           on: { click: _vm.createReservation }
                         },
                         [
                           _vm.loading
                             ? _c("b-spinner", { attrs: { small: "" } })
                             : _vm._e(),
-                          _vm._v(
-                            "\n                                      Submit\n                                "
-                          )
+                          _vm._v(" "),
+                          !_vm.isFinished
+                            ? _c("span", [_vm._v("Submit ")])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.isFinished
+                            ? _c("span", [_vm._v("✔ Reservation Successful! ")])
+                            : _vm._e()
                         ],
                         1
                       )

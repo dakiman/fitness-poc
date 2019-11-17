@@ -47,9 +47,10 @@
                                     </div>
 
                                     <div >
-                                    <b-button :class="{ 'btn-danger' : loading }" @click="createReservation" type="submit" class="btn btn-primary">
+                                    <b-button :class="{ 'btn-secondary' : loading , 'btn-success' : isFinished}" :disabled='isFinished' @click="createReservation" type="submit" class="btn btn-primary">
                                         <b-spinner small v-if="loading"></b-spinner>
-                                          Submit
+                                        <span v-if="!isFinished">Submit </span>
+                                        <span v-if="isFinished">✔ Reservation Successful! </span>
                                     </b-button>
                                     </div>
                                 </div>
@@ -72,6 +73,7 @@
                 email: '',
                 phoneNumber: '',
                 loading: false,
+                isFinished: false,
                 errors: {},
             }
         },
@@ -89,6 +91,7 @@
                     .then(response => {
                         console.log(response);
                         this.loading = false;
+                        this.isFinished = true;
                         alert('Success!')
                     })
                     .catch(error => {
