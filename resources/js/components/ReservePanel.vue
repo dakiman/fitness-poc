@@ -30,7 +30,7 @@
 
                                     <div>
                                         <b-form-group label="Email address" id="inputEmail" description="We will never share you email with anyone">
-                                        <b-form-input @focus="errors.email = undefined" v-model="email" type="email" :class="{ 'is-invalid' : errors.phoneNumber }" trim></b-form-input>
+                                        <b-form-input @focus="errors.email = undefined" v-model="email" type="email" :class="{ 'is-invalid' : errors.email }" trim></b-form-input>
                                             <div v-if="errors.email">
                                                 <small v-for="error in errors.email" id="emailError" class="form-text text-danger">{{error}}</small>
                                             </div>
@@ -46,9 +46,12 @@
                                         </b-form-group>
                                     </div>
 
+                                    <div >
                                     <b-button :class="{ 'btn-danger' : loading }" @click="createReservation" type="submit" class="btn btn-primary">
-                                        Submit
+                                        <b-spinner small v-if="loading"></b-spinner>
+                                          Submit
                                     </b-button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
