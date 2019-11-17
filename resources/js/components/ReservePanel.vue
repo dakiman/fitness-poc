@@ -18,35 +18,37 @@
                             </div>
                             <div class="col-md-7">
                                 <div class="form">
-                                    <div class="form-group">
-                                        <label for="nameInput">Name</label>
-                                        <input :class="{ 'is-invalid' : errors.phoneNumber }" v-model="name" type="text" class="form-control" id="nameInput"
-                                               placeholder="Name">
-                                        <!--                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+
+                                    <div>
+                                        <b-form-group label="Name" id="nameInput" description="Please tell us who you are">
+                                            <b-form-input @focus="errors.name = undefined" v-model="name" type="text" :class="{ 'is-invalid' : errors.name }" trim></b-form-input>
+                                            <div v-if="errors.name">
+                                                <small v-for="error in errors.name" id="nameError" class="form-text  text-danger">{{error}}</small>
+                                            </div>
+                                        </b-form-group>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Email address</label>
-                                        <input v-model="email" type="email" class="form-control" id="exampleInputEmail1"
-                                               aria-describedby="emailHelp" placeholder="Enter email">
-                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email
-                                            with anyone else.</small>
+                                    <div>
+                                        <b-form-group label="Email address" id="inputEmail" description="We will never share you email with anyone">
+                                        <b-form-input @focus="errors.email = undefined" v-model="email" type="email" :class="{ 'is-invalid' : errors.phoneNumber }" trim></b-form-input>
+                                            <div v-if="errors.email">
+                                                <small v-for="error in errors.email" id="emailError" class="form-text text-danger">{{error}}</small>
+                                            </div>
+                                        </b-form-group>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="phoneNumberInput">Phone Number</label>
-                                        <input @focus="errors.phoneNumber = undefined" v-model="phoneNumber" type="text" :class="{ 'is-invalid' : errors.phoneNumber }" class=" form-control"
-                                               id="phoneNumberInput" placeholder="Phone Number">
-                                        <div v-if="errors.phoneNumber">
-                                            <small v-for="error in errors.phoneNumber" id="phoneNumberError" class="form-text text-muted">{{error}}</small>
-                                        </div>
+
+                                    <div>
+                                        <b-form-group label="Phone Number" id="phoneNumberInput" description="We will never share you phone number with anyone">
+                                        <b-form-input @focus="errors.phoneNumber = undefined" v-model="phoneNumber" type="text" :class="{ 'is-invalid' : errors.phoneNumber }" id="phoneNumberInput"> </b-form-input>
+                                            <div v-if="errors.phoneNumber">
+                                            <small v-for="error in errors.phoneNumber" id="phoneNumberError" class="form-text text-danger">{{error}}</small>
+                                            </div>
+                                        </b-form-group>
                                     </div>
-                                    <div class="form-group form-check">
-                                        <!--                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
-                                        <!--                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
-                                    </div>
-                                    <button :class="{ 'btn-danger' : loading }" @click="createReservation" type="submit" class="btn btn-primary">
+
+                                    <b-button :class="{ 'btn-danger' : loading }" @click="createReservation" type="submit" class="btn btn-primary">
                                         Submit
-                                    </button>
+                                    </b-button>
                                 </div>
                             </div>
                         </div>
@@ -80,11 +82,11 @@
             createReservation() {
                 this.loading = true;
                 axios
-                    .post('/reserve', this.$data)
+                    .post('/reservations', this.$data)
                     .then(response => {
                         console.log(response);
                         this.loading = false;
-                        alert('Sucess!')
+                        alert('Success!')
                     })
                     .catch(error => {
                         console.log(error.response.data.errors);

@@ -1931,6 +1931,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1951,10 +1953,10 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.loading = true;
-      axios.post('/reserve', this.$data).then(function (response) {
+      axios.post('/reservations', this.$data).then(function (response) {
         console.log(response);
         _this.loading = false;
-        alert('Sucess!');
+        alert('Success!');
       })["catch"](function (error) {
         console.log(error.response.data.errors);
         _this.loading = false;
@@ -51636,156 +51638,190 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-7" }, [
-                _c("div", { staticClass: "form" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "nameInput" } }, [
-                      _vm._v("Name")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.name,
-                          expression: "name"
-                        }
+                _c(
+                  "div",
+                  { staticClass: "form" },
+                  [
+                    _c(
+                      "div",
+                      [
+                        _c(
+                          "b-form-group",
+                          {
+                            attrs: {
+                              label: "Name",
+                              id: "nameInput",
+                              description: "Please tell us who you are"
+                            }
+                          },
+                          [
+                            _c("b-form-input", {
+                              class: { "is-invalid": _vm.errors.name },
+                              attrs: { type: "text", trim: "" },
+                              on: {
+                                focus: function($event) {
+                                  _vm.errors.name = undefined
+                                }
+                              },
+                              model: {
+                                value: _vm.name,
+                                callback: function($$v) {
+                                  _vm.name = $$v
+                                },
+                                expression: "name"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm.errors.name
+                              ? _c(
+                                  "div",
+                                  _vm._l(_vm.errors.name, function(error) {
+                                    return _c(
+                                      "small",
+                                      {
+                                        staticClass: "form-text  text-danger",
+                                        attrs: { id: "nameError" }
+                                      },
+                                      [_vm._v(_vm._s(error))]
+                                    )
+                                  }),
+                                  0
+                                )
+                              : _vm._e()
+                          ],
+                          1
+                        )
                       ],
-                      staticClass: "form-control",
-                      class: { "is-invalid": _vm.errors.phoneNumber },
-                      attrs: {
-                        type: "text",
-                        id: "nameInput",
-                        placeholder: "Name"
-                      },
-                      domProps: { value: _vm.name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.name = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                      _vm._v("Email address")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.email,
-                          expression: "email"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "email",
-                        id: "exampleInputEmail1",
-                        "aria-describedby": "emailHelp",
-                        placeholder: "Enter email"
-                      },
-                      domProps: { value: _vm.email },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.email = $event.target.value
-                        }
-                      }
-                    }),
+                      1
+                    ),
                     _vm._v(" "),
                     _c(
-                      "small",
+                      "div",
+                      [
+                        _c(
+                          "b-form-group",
+                          {
+                            attrs: {
+                              label: "Email address",
+                              id: "inputEmail",
+                              description:
+                                "We will never share you email with anyone"
+                            }
+                          },
+                          [
+                            _c("b-form-input", {
+                              class: { "is-invalid": _vm.errors.phoneNumber },
+                              attrs: { type: "email", trim: "" },
+                              on: {
+                                focus: function($event) {
+                                  _vm.errors.email = undefined
+                                }
+                              },
+                              model: {
+                                value: _vm.email,
+                                callback: function($$v) {
+                                  _vm.email = $$v
+                                },
+                                expression: "email"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm.errors.email
+                              ? _c(
+                                  "div",
+                                  _vm._l(_vm.errors.email, function(error) {
+                                    return _c(
+                                      "small",
+                                      {
+                                        staticClass: "form-text text-danger",
+                                        attrs: { id: "emailError" }
+                                      },
+                                      [_vm._v(_vm._s(error))]
+                                    )
+                                  }),
+                                  0
+                                )
+                              : _vm._e()
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      [
+                        _c(
+                          "b-form-group",
+                          {
+                            attrs: {
+                              label: "Phone Number",
+                              id: "phoneNumberInput",
+                              description:
+                                "We will never share you phone number with anyone"
+                            }
+                          },
+                          [
+                            _c("b-form-input", {
+                              class: { "is-invalid": _vm.errors.phoneNumber },
+                              attrs: { type: "text", id: "phoneNumberInput" },
+                              on: {
+                                focus: function($event) {
+                                  _vm.errors.phoneNumber = undefined
+                                }
+                              },
+                              model: {
+                                value: _vm.phoneNumber,
+                                callback: function($$v) {
+                                  _vm.phoneNumber = $$v
+                                },
+                                expression: "phoneNumber"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm.errors.phoneNumber
+                              ? _c(
+                                  "div",
+                                  _vm._l(_vm.errors.phoneNumber, function(
+                                    error
+                                  ) {
+                                    return _c(
+                                      "small",
+                                      {
+                                        staticClass: "form-text text-danger",
+                                        attrs: { id: "phoneNumberError" }
+                                      },
+                                      [_vm._v(_vm._s(error))]
+                                    )
+                                  }),
+                                  0
+                                )
+                              : _vm._e()
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-button",
                       {
-                        staticClass: "form-text text-muted",
-                        attrs: { id: "emailHelp" }
+                        staticClass: "btn btn-primary",
+                        class: { "btn-danger": _vm.loading },
+                        attrs: { type: "submit" },
+                        on: { click: _vm.createReservation }
                       },
                       [
                         _vm._v(
-                          "We'll never share your email\n                                        with anyone else."
+                          "\n                                    Submit\n                                "
                         )
                       ]
                     )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "phoneNumberInput" } }, [
-                      _vm._v("Phone Number")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.phoneNumber,
-                          expression: "phoneNumber"
-                        }
-                      ],
-                      staticClass: " form-control",
-                      class: { "is-invalid": _vm.errors.phoneNumber },
-                      attrs: {
-                        type: "text",
-                        id: "phoneNumberInput",
-                        placeholder: "Phone Number"
-                      },
-                      domProps: { value: _vm.phoneNumber },
-                      on: {
-                        focus: function($event) {
-                          _vm.errors.phoneNumber = undefined
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.phoneNumber = $event.target.value
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.phoneNumber
-                      ? _c(
-                          "div",
-                          _vm._l(_vm.errors.phoneNumber, function(error) {
-                            return _c(
-                              "small",
-                              {
-                                staticClass: "form-text text-muted",
-                                attrs: { id: "phoneNumberError" }
-                              },
-                              [_vm._v(_vm._s(error))]
-                            )
-                          }),
-                          0
-                        )
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group form-check" }),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      class: { "btn-danger": _vm.loading },
-                      attrs: { type: "submit" },
-                      on: { click: _vm.createReservation }
-                    },
-                    [
-                      _vm._v(
-                        "\n                                    Submit\n                                "
-                      )
-                    ]
-                  )
-                ])
+                  ],
+                  1
+                )
               ])
             ])
           ])
